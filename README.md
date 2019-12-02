@@ -69,7 +69,7 @@ This repository aims at mirroring popular semantic segmentation architectures in
 ```yaml
 # Model Configuration
 model:
-    arch: <name> [options: 'fcn[8,16,32]s, unet, segnet, bayesian_segnet, pspnet, icnet, icnetBN, linknet, frrn[A,B]'
+    arch: <name> [options: 'fcn[8,16,32]s, unet, segnet, baysian_segnet, pspnet, icnet, icnetBN, linknet, frrn[A,B]'
     <model_keyarg_1>:<value>
 
 # Data Configuration

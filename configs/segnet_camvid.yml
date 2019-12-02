@@ -1,0 +1,28 @@
+model:
+    arch: 'segnet'
+data:
+    dataset: 'camvid'
+    train_split: 'train'
+    val_split: 'val'
+    img_rows: 480
+    img_cols: 360
+    path: '/home/vishnusharma/segnet/SegNet/CamVid/'
+training:
+    train_iters: 40000
+    batch_size: 4
+    val_interval: 100
+    n_workers: 16
+    print_interval: 10
+    optimizer:
+        name: 'sgd'
+        lr: 0.001
+        weight_decay: 0.0005
+        momentum: 0.9
+    augmentations:
+        gamma: 1.0
+    loss:
+        name: 'cross_entropy_camvid'
+        size_average: True
+    lr_schedule:
+    resume: 'segnet_weighted_camvid_best_model_24hr_bs4_ep40k.pkl'
+

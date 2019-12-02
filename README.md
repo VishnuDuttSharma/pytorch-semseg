@@ -25,8 +25,8 @@ This repository aims at mirroring popular semantic segmentation architectures in
 * [FCN](https://arxiv.org/abs/1411.4038) - All 1 (FCN32s), 2 (FCN16s) and 3 (FCN8s) stream variants
 * [U-Net](https://arxiv.org/abs/1505.04597) - With optional deconvolution and batchnorm
 * [Link-Net](https://codeac29.github.io/projects/linknet/) - With multiple resnet backends
-* [Segnet](https://arxiv.org/abs/1511.00561) - With Unpooling using Maxpool indices
-
+* [SegNet](https://arxiv.org/abs/1511.00561) - With Unpooling using Maxpool indices
+* [Bayesian SegNet](https://arxiv.org/abs/1511.02680) - SegNet with dropouts to estimate prediction uncertainty
 
 #### Upcoming 
 
@@ -69,7 +69,7 @@ This repository aims at mirroring popular semantic segmentation architectures in
 ```yaml
 # Model Configuration
 model:
-    arch: <name> [options: 'fcn[8,16,32]s, unet, segnet, pspnet, icnet, icnetBN, linknet, frrn[A,B]'
+    arch: <name> [options: 'fcn[8,16,32]s, unet, segnet, bayesian_segnet, pspnet, icnet, icnetBN, linknet, frrn[A,B]'
     <model_keyarg_1>:<value>
 
 # Data Configuration
@@ -90,7 +90,7 @@ training:
     val_interval: 500
     print_interval: 25
     loss:
-        name: <loss_type> [options: 'cross_entropy, bootstrapped_cross_entropy, multi_scale_crossentropy']
+        name: <loss_type> [options: 'cross_entropy, cross_entropy_camvid, bootstrapped_cross_entropy, multi_scale_crossentropy']
         <loss_keyarg1>:<value>
 
     # Optmizer Configuration
@@ -162,6 +162,7 @@ python test.py [-h] [--model_path [MODEL_PATH]] [--dataset [DATASET]]
   --out_path            Path of the output segmap
 ```
 
+** If you want to get undecoded images (only annotations), use ```test_annot.py``` instead with same arguments. **
 
 **If you find this code useful in your research, please consider citing:**
 

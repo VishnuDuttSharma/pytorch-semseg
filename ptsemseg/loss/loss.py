@@ -1,6 +1,36 @@
 import torch
 import torch.nn.functional as F
 
+def cross_entropy2d_camvid(input, target, weight=None, size_average=True):
+    n, c, h, w = input.size()
+    nt, ht, wt = target.size()
+    
+    loss_weight = torch.tensor([
+        0.2595,
+        0.1826,
+        4.5640,
+        0.1417,
+        0.9051,
+        0.3826,
+        9.6446,
+        1.8418,
+        0.6823,
+        6.2478,
+        7.3614,
+        1.0974
+    ]).to(target.device)  
+
+    # Handle inconsistent size between input and target
+    if h != ht and w != wt:  # upsample labels
+        input = F.interpolate(input, size=(ht, wt), mode="bilinear", align_corners=True)
+
+    input = input.transpose(1, 2).transpose(2, 3).contiguous().view(-1, c)
+    target = target.view(-1)
+    loss = F.cross_entropy(
+        input, target, weight=loss_weight, size_average=size_average, ignore_index=11
+    )
+    return loss
+
 
 def cross_entropy2d(input, target, weight=None, size_average=True):
     n, c, h, w = input.size()

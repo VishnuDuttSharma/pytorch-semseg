@@ -1,3 +1,6 @@
+from IPython.core.display import HTML
+HTML("<script>Jupyter.notebook.kernel.restart()</script>")
+
 import os
 import yaml
 import time
@@ -21,6 +24,7 @@ from ptsemseg.optimizers import get_optimizer
 
 from tensorboardX import SummaryWriter
 
+torch.cuda.empty_cache()
 
 def train(cfg, writer, logger):
 
@@ -214,7 +218,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     with open(args.config) as fp:
-        cfg = yaml.load(fp)
+        cfg = yaml.load(fp, Loader=yaml.FullLoader)
 
     run_id = random.randint(1, 100000)
     logdir = os.path.join("runs", os.path.basename(args.config)[:-4], str(run_id))

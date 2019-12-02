@@ -3,6 +3,7 @@ import torchvision.models as models
 
 from ptsemseg.models.fcn import fcn8s, fcn16s, fcn32s
 from ptsemseg.models.segnet import segnet
+from ptsemseg.models.baysian_segnet import baysian_segnet
 from ptsemseg.models.unet import unet
 from ptsemseg.models.pspnet import pspnet
 from ptsemseg.models.icnet import icnet
@@ -25,6 +26,11 @@ def get_model(model_dict, n_classes, version=None):
         model.init_vgg16_params(vgg16)
 
     elif name == "segnet":
+        model = model(n_classes=n_classes, **param_dict)
+        vgg16 = models.vgg16(pretrained=True)
+        model.init_vgg16_params(vgg16)
+
+    elif name == "baysian_segnet":
         model = model(n_classes=n_classes, **param_dict)
         vgg16 = models.vgg16(pretrained=True)
         model.init_vgg16_params(vgg16)
@@ -55,6 +61,7 @@ def _get_model_instance(name):
             "fcn16s": fcn16s,
             "unet": unet,
             "segnet": segnet,
+            "baysian_segnet": baysian_segnet,
             "pspnet": pspnet,
             "icnet": icnet,
             "icnetBN": icnet,

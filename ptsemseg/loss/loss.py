@@ -16,8 +16,8 @@ def cross_entropy2d_camvid(input, target, weight=None, size_average=True):
         1.8418,
         0.6823,
         6.2478,
-        7.3614,
-        1.0974
+        7.3614
+        #1.0974
     ]).to(target.device)  
 
     # Handle inconsistent size between input and target

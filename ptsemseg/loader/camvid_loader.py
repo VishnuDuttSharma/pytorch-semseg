@@ -28,7 +28,7 @@ class camvidLoader(data.Dataset):
         self.img_norm = img_norm
         self.test_mode = test_mode
         self.mean = np.array([104.00699, 116.66877, 122.67892])
-        self.n_classes = 12
+        self.n_classes = 11#12
         self.files = collections.defaultdict(list)
 
         if not self.test_mode:
